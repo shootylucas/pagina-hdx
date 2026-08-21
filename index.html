@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinesat Manager Pro + Gemini IA</title>
+    <!-- FontAwesome para iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Marked.js para renderizar Markdown de Gemini -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Enlace a la hoja de estilos CSS externa -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1 style="text-align: center; margin-bottom: 30px;"><i class="fas fa-broadcast-tower"></i> Dinesat Manager Pro</h1>
+
+    <div class="main-container">
+        <!-- PANEL 1: DANTE GEBEL -->
+        <div class="panel">
+            <div class="panel-header dante-header">
+                <i class="fas fa-church fa-lg" style="margin-right: 10px; color: var(--accent-dante);"></i>
+                <h2>Programas Seriados</h2>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0;">
+                <i class="fas fa-edit"></i> Clic en el número para editarlo manualmente.
+            </p>
+            
+            <div class="dante-grid" id="danteGrid">
+                <!-- Se genera dinámicamente -->
+            </div>
+        </div>
+
+        <!-- PANEL 2: FESTIVALES -->
+        <div class="panel">
+            <div class="panel-header fest-header" style="margin-bottom: 10px;">
+                <i class="fas fa-guitar fa-lg" style="margin-right: 10px; color: var(--accent-fest);"></i>
+                <h2 style="margin: 0;">Rotación de Festivales</h2>
+                <span class="counter-badge" id="festCount">0</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                 <p style="font-size: 0.85rem; color: var(--text-secondary); margin:0;">
+                    <i class="fas fa-sort-amount-down"></i> El primero es el recomendado, pero podés pautar cualquiera.
+                </p>
+                <button onclick="resetearRotacionFestivales()" style="background:none; border:none; color: var(--danger); cursor:pointer; font-size:0.8rem; font-weight: bold;">
+                    <i class="fas fa-sync-alt"></i> Resetear Orden
+                </button>
+            </div>
+           
+            <ul class="fest-list" id="festivalList">
+                <!-- Se genera dinámicamente -->
+            </ul>
+
+            <div class="add-festival-form">
+                <input type="text" id="newFestivalInput" placeholder="Añadir nuevo festival o show...">
+                <button class="btn-add" onclick="agregarFestivalUI()"><i class="fas fa-plus"></i> Añadir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL 3: ASISTENTE IA GEMINI -->
+    <div class="chat-container">
+        <div class="chat-header">
+            <div>
+                <i class="fas fa-robot" style="color: var(--accent-dante);"></i> Asistente de Operaciones
+            </div>
+            <div class="gemini-badge"><i class="fas fa-bolt"></i> Powered by Gemini AI</div>
+        </div>
+        <div class="chat-messages" id="chatBox">
+            <div class="message msg-ai">
+                ¡Hola! Soy tu asistente inteligente con tecnología Gemini. Estoy conectado en tiempo real a tus datos. Podés preguntarme libremente sobre la pauta. Por ejemplo: *"¿Cuáles son los próximos 3 festivales que tengo que preparar?"* o *"¿Qué me toca pautar a las 17:00?"*.
+            </div>
+            <!-- Indicador de carga -->
+            <div class="typing-indicator" id="typingIndicator">
+                Gemini está analizando tus datos...
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Escribí tu consulta al asistente..." onkeypress="if(event.key === 'Enter') sendChatMessageToGemini()">
+            <button class="btn-send" id="btnSendChat" onclick="sendChatMessageToGemini()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Enlace al archivo de JavaScript externo -->
+    <script src="script.js"></script>
+</body>
+</html>
